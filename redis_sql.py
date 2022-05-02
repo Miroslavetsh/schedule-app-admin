@@ -14,7 +14,11 @@ def get_lesson(full_name):
     with redis.Redis() as client:
         for i in client.json().get('subjects'):
             if i['teacherId'] == get_teacher_id(full_name):
-                pass
+                subjects.append(i["id"])
+        for i in client.json().get('pairs'):
+            if i["subjectId"] in subjects:
+                lessons.append(i)
+    return lessons
 
 def changing_sc(changes_list):
     with redis.Redis() as client:
