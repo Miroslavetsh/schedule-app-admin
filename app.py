@@ -16,7 +16,7 @@ def index():
 @app.route('/teachers', methods=['get','post'])
 def teachers():
     if request.method == "post":
-        output = request.form.to_dict()['full_name']
+        output = request.form.get('full_name')
         return render_template('teachers.html', lessons=redis_sql.get_lessons(output))
     else:
         return render_template('teachers.html')
@@ -24,7 +24,8 @@ def teachers():
 @app.route('/changing_sc', methods=['get','post'])
 def changing_sc():
     if request.method == 'post':
-        pass
+        output = request.form.to_dict()
+        redis_sql.changing_sc(output)
     else:
         return render_template('changing_sc.html')
 
