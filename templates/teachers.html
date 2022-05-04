@@ -1,12 +1,16 @@
-{% extends 'base.html'}
+{% extends 'base.html' %}
 
-{% base content %}
+{% block content %}
 
-<form class = "something" action="/teachers" method="POST">
-    <label for="Name">введіть піб :</label><br>
-    <input type="text" id="full_name" name="full_name"><br>
-    <input type="submit" class="file_submit">
+<form action="/teachers" method="post">
+    <label>введіть піб :</label><br>
+    <input type="text" name="full_name" /><br>
+    <input type="submit" value="send this" />
   </form>
+
+{% if lessons %}
+<h3>{{lessons}}</h3>
+{% endif %}
 
 
 {% endblock %}
