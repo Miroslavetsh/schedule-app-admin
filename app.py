@@ -11,19 +11,21 @@ logging.basicConfig(filename="logfile.txt",
 
 logging.debug("Logging test...")
 
-redis_sql.add_teacher('Myroslav Toloshnyi')
+# print(redis_sql.get_subjects())
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     logging.warning('route index')
     return render_template('index.html')
 
-@app.route('/teachers', methods=['get','post'])
+
+@app.route('/teachers', methods=['get', 'post'])
 def teachers():
     logging.warning('route teachers post1 method')
-    if request.method == "post": # не працює!!!!!!!
+    if request.method == "post":  # не працює!!!!!!!
         output = request.form['full_name']
         logging.warning('route teachers post2 method')
         logging.error(output)
@@ -32,7 +34,8 @@ def teachers():
         logging.warning('route teachers get method')
         return render_template('teachers.html')
 
-@app.route("/create_teacher", methods=['get','post'])
+
+@app.route("/create_teacher", methods=['get', 'post'])
 def create():
     if request.method == "post":
         output = request.form.get('new_name')
@@ -45,13 +48,13 @@ def create():
         return render_template('create_teacher.html')
 
 
-@app.route('/changing_sc', methods=['get','post'])
+@app.route('/changing_sc', methods=['get', 'post'])
 def changing_sc():
     if request.method == 'post':
         output = request.form.to_dict()
         redis_sql.changing_sc(output)
     else:
-        return render_template('changing_sc.html')
+        return render_template('changing_sc.html', subjects=redis_sql.get_subjects())
 
 
 if __name__ == "__main__":

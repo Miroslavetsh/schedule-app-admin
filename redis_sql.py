@@ -3,9 +3,9 @@ from redis.commands.json.path import Path
 import uuid
 from redis_worker import jsonfile
 
-# Это для автоматического создания массивов с уже заполенными данными из example.json 
+# Это для автоматического создания массивов с уже заполенными данными из example.json
 # with redis.Redis() as client:
-    # client.json().set('subjects', Path.root_path(), jsonfile)
+# client.json().set('subjects', Path.root_path(), jsonfile)
 
 
 def get_teacher_id(full_name):
@@ -53,6 +53,14 @@ def add_teacher(name):
         jsonfile = {'id': str(uuid.uuid4()), "name": name}
         with redis.Redis() as client:
             client.json().arrappend('teachers', Path.root_path(), jsonfile)
+
+
+def get_subjects():
+    subjects = []
+    with redis.Redis() as client:
+        for i in client.json().get("subjects"):
+            subjects.append(i)
+    return subjects
 
 #TODO: add_schedule
 #TODO: add_subject
