@@ -11,6 +11,7 @@ logging.basicConfig(filename="logfile.txt",
 
 logging.debug("Logging test...")
 
+redis_sql.add_teacher('Myroslav Toloshnyi')
 
 app = Flask(__name__)
 

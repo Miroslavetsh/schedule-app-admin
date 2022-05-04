@@ -13,3 +13,8 @@ run venv
 run app
 #python app.py
 also run image
+
+
+Кароч, там нужно сначала в редисе создать по ключу teachers, schedule, etc. пустой массив:
+в redis-cli прописываешь:
+json.set "teachers", '.', []
