@@ -1,31 +1,15 @@
 
 
 
+how to run project
+you must have python, docker with redis image
 
-
-#python3 -m venv name
-
+create any folder and run to it
 #cd /d D:\cod\folder
-#python3 -m venv redis_sandbox
+create virtual environment
+#python3 -m venv name
+run venv
 #redis_sandbox\Scripts\activate
+run app
 #python app.py
-
-
-
-
-# with redis.Redis() as client:
-#     client.set(name="timer", value="0")
-#     while int(client.get('timer')) < 100:
-#         client.incr('timer')
-#         time.sleep(1)
-
-# with redis.Redis() as client:
-#     while len(client.keys(value="*")) != 200:
-#         client.set("".join(random.sample(ascii_letters, random.randint(1,20))),1)
-
-# docker run -p 127.0.0.1:6379:6379 redis:latest
-# docker-cli
-
-lpush list2 '{"a":55}'
-
-json.set list '{"a":2}'
+also run image
