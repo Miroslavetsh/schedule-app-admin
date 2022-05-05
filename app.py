@@ -1,8 +1,8 @@
 # Third-party libs
 from flask import Flask, render_template, request
-import redis_sql
 import logging
 # Our libs
+import redis_sql
 from redis_workers.teachers import get_all_teachers
 
 logging.basicConfig(filename="logfile.txt",
