@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %} {{groups}} {% endblock %}
+
+<form action="/groups/add" method="post">
+  
+</form>
+
+<form action="/groups/<str:id>/update"></form>
+
+<form action="/groups/<str:id>/delete"></form>
