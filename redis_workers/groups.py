@@ -2,7 +2,7 @@ import redis
 from redis.commands.json.path import Path
 
 
-def get_groups():
+def get_all_groups():
     with redis.Redis() as client:
         return client.json().get('groups')
 

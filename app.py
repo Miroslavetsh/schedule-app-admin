@@ -1,12 +1,12 @@
 # Third-party libs
-from tokenize import group
 from flask import Flask, render_template, request
 import logging
 # Our libs
 import redis_sql
 from redis_workers.pairs import get_pairs_by_teacher_id
-from redis_workers.teachers import get_all_teachers
-# import routes.groups as groups_routes
+from redis_workers.teachers import get_teachers_list
+from routes.groups import groups_page
+from routes.teachers import teachers_page
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -17,38 +17,14 @@ logging.basicConfig(filename="logfile.txt",
 logging.debug("Logging test...")
 
 app = Flask(__name__, template_folder='templates')
-
-# groups_routes
+app.register_blueprint(groups_page, url_prefix='/groups')
+app.register_blueprint(teachers_page, url_prefix='/teachers')
 
 
 @app.route('/')
 def index():
-    teachers = get_all_teachers()
+    teachers = get_teachers_list()
     return render_template('index.html', teachers=teachers)
-
-
-@app.route('/teachers', methods=['get', 'post'])
-def teachers():
-    if request.method == "post":
-        # Here we are posting a new teacher
-        output = request.form['full_name']
-        return render_template('teachers.html')
-    else:
-        # Return a teachers_list to the teachers_page
-        return render_template('teachers.html', teachers=teachers)
-
-
-@app.route("/create_teacher", methods=['get', 'post'])
-def create():
-    if request.method == "post":
-        output = request.form.get('new_name')
-        logging.warning('route create teacher post method')
-        logging.error(output)
-        redis_sql.add_teacher(output)
-        return render_template('index.html')
-    else:
-        logging.warning('route create teacher get method')
-        return render_template('create_teacher.html')
 
 
 @app.route('/schedules', methods=['get', 'post'])

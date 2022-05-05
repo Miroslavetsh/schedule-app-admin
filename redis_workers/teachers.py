@@ -3,20 +3,20 @@ import redis
 from redis.commands.json.path import Path
 
 
-def check_if_do_not_exist_in_db(name):
-    return get_teacher_by_name(name) == None
+def does_not_teacher_exist_in_db(name):
+    return not get_teacher_by_name(name) is None
 
 
 def get_teacher_by_name(name):
     with redis.Redis() as client:
         for teacher in client.json().get('teachers'):
-            if teacher['name'] == name:
+            if str(teacher['name']) == str(name):
                 return teacher
             return None
 
 
 def add_teacher(name):
-    if check_if_do_not_exist_in_db(name):
+    if does_not_teacher_exist_in_db(name):
         teacher_data = {'id': str(uuid.uuid4()), "name": name}
 
         with redis.Redis() as client:
@@ -27,7 +27,7 @@ def add_teacher(name):
         return False
 
 
-def get_all_teachers():
+def get_teachers_list():
     with redis.Redis() as client:
         return client.json().get('teachers')
 
