@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <a href="http://127.0.0.1:5000/changing_sc">змінити розклад</a>
-
+<a href="http://127.0.0.1:5000/create_teacher">добавити викладача</a>
 <form action="/pairs" method="post">
   <select name="teacher_id" id="teacher_id">
     {% for teacher in teachers %}

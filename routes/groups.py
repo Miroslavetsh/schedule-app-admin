@@ -3,7 +3,7 @@ from flask import render_template
 
 from redis_workers.groups import get_groups
 
-from __main__ import app
+from app import app
 
 
 @app.route('/groups', methods=['get'])

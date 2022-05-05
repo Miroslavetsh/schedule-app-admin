@@ -1,12 +1,13 @@
 # Third-party libs
 from tokenize import group
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import logging
 # Our libs
 import redis_sql
 from redis_workers.pairs import get_pairs_by_teacher_id
 from redis_workers.teachers import get_all_teachers
 import routes.groups as groups_routes
+import redis_workers.teachers as teachers_control
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -38,14 +39,13 @@ def teachers():
         return render_template('teachers.html', teachers=teachers)
 
 
-@app.route("/create_teacher", methods=['get', 'post'])
+@app.route("/create_teacher", methods=['get', 'POST'])
 def create():
-    if request.method == "post":
+    if request.method == "POST":
         output = request.form.get('new_name')
         logging.warning('route create teacher post method')
-        logging.error(output)
-        redis_sql.add_teacher(output)
-        return render_template('index.html')
+        teachers_control.add_teacher(output)
+        return redirect('/')
     else:
         logging.warning('route create teacher get method')
         return render_template('create_teacher.html')
