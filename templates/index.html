@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<form action="/pairs" method="post">
+<form action="/pairs" method="POST">
   <select name="teacher_id" id="teacher_id">
     {% for teacher in teachers %}
     <option value="{{teacher['id']}}">{{teacher['name']}}</option>
