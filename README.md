@@ -1,6 +1,6 @@
 # Schedule App Admin
-This is the second part of already existing schedule-app-ui, which main task of that is in comfortable schedule manipulating. Make changing of schedule for teacher more flexible, comfortable and very simple...
 
+This is the second part of already existing schedule-app-ui, which main task of that is in comfortable schedule manipulating. Make changing of schedule for teacher more flexible, comfortable and very simple...
 
 ## How to run application
 
@@ -11,3 +11,15 @@ This is the second part of already existing schedule-app-ui, which main task of 
 ## Overview
 
 Let me start from the _app.py_ file
+
+### Local updates
+
+create any folder and run to it
+#cd /d D:\cod\folder
+create virtual environment
+#python3 -m venv name
+run venv
+#redis_sandbox\Scripts\activate
+run app
+#python app.py
+also run image
