@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request
 import redis_sql
 import logging
+from redis_workers.pairs import get_pairs_by_teacher_id
 # Our libs
 from redis_workers.teachers import get_all_teachers
 
@@ -54,6 +55,17 @@ def changing_sc():
         redis_sql.changing_sc(output)
     else:
         return render_template('changing_sc.html', subjects=redis_sql.get_subjects())
+
+
+@app.route('/pairs', methods=['get', 'post'])
+def get_pairs():
+    if request.method == 'POST':
+        form_params = request.form.to_dict()
+        pairs = get_pairs_by_teacher_id(form_params['teacher_id'])
+
+        return render_template('pairs.html', pairs=pairs)
+    else:
+        return render_template('pairs.html', pairs=[])
 
 
 if __name__ == "__main__":
