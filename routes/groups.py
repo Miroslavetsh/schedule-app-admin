@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 
 from redis_workers.groups import get_all_groups
 
-groups_page = Blueprint('groups_page', __name__,
+groups_page = Blueprint('/groups', __name__,
                         template_folder='templates')
 
 
