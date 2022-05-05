@@ -4,7 +4,6 @@ from flask import Flask, render_template, request
 import logging
 # Our libs
 import redis_sql
-from redis_workers.pairs import get_pairs_by_teacher_id
 from redis_workers.teachers import get_all_teachers
 import routes.groups as groups_routes
 
