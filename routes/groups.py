@@ -8,7 +8,6 @@ groups_page = Blueprint('groups_page', __name__,
 
 @groups_page.route('/', methods=['get'])
 def get_groups():
-    # print('here')
     groups = get_all_groups()
 
     return render_template('groups.html', groups=groups)

@@ -16,6 +16,7 @@ def get_teacher_by_name(name):
 
 
 def add_teacher(name):
+    print(name)
     if check_if_do_not_exist_in_db(name):
         teacher_data = {'id': str(uuid.uuid4()), "name": name}
 
@@ -27,7 +28,7 @@ def add_teacher(name):
         return False
 
 
-def get_all_teachers():
+def get_teachers_list():
     with redis.Redis() as client:
         return client.json().get('teachers')
 

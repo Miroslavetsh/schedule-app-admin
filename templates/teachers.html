@@ -1,16 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
-
-<form action="/teachers" method="post">
-    <label>введіть піб :</label><br>
-    <input type="text" name="full_name" /><br>
-    <input type="submit" value="send this" />
-  </form>
-
-{% if lessons %}
-<h3>{{lessons}}</h3>
-{% endif %}
-
+<h3>{{teachers}}</h3>
 
 {% endblock %}
