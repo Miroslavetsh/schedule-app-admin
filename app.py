@@ -4,8 +4,9 @@ from flask import Flask, render_template, request
 import logging
 # Our libs
 import redis_sql
+from redis_workers.pairs import get_pairs_by_teacher_id
 from redis_workers.teachers import get_all_teachers
-import routes.groups as groups_routes
+# import routes.groups as groups_routes
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -17,7 +18,7 @@ logging.debug("Logging test...")
 
 app = Flask(__name__, template_folder='templates')
 
-groups_routes
+# groups_routes
 
 
 @app.route('/')
