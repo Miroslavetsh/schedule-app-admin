@@ -31,6 +31,15 @@ def get_teachers_list():
     with redis.Redis() as client:
         return client.json().get('teachers')
 
+def delete_teacher(name):
+    if not does_not_teacher_exist_in_db:
+        with redis.Redis() as client:
+            client.execute_command(f'JSON.DEL teachers $.{name}', Path.root_path())
+            return True
+    else:
+        return False
 
-# TODO: update teacher
-# TODO: delete teacher
+def update_teacher(name, new_name):
+    delete_teacher(name)
+    add_teacher(new_name)
+    return True
