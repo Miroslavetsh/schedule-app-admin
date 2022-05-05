@@ -1,12 +1,11 @@
 # Third-party libs
-from tokenize import group
 from flask import Flask, render_template, request
 import logging
 # Our libs
 import redis_sql
 from redis_workers.pairs import get_pairs_by_teacher_id
 from redis_workers.teachers import get_all_teachers
-# import routes.groups as groups_routes
+from routes.groups import groups_page
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -17,8 +16,7 @@ logging.basicConfig(filename="logfile.txt",
 logging.debug("Logging test...")
 
 app = Flask(__name__, template_folder='templates')
-
-# groups_routes
+app.register_blueprint(groups_page, url_prefix='/groups')
 
 
 @app.route('/')
