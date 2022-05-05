@@ -29,7 +29,7 @@ def add_teacher(name):
 
 def get_all_teachers():
     with redis.Redis() as client:
-        client.json().arrappend('teachers', Path.root_path())
+        return client.json().get('teachers')
 
 
 # TODO: update teacher

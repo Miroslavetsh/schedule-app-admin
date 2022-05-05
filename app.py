@@ -1,7 +1,9 @@
-import redis
+# Third-party libs
 from flask import Flask, render_template, request
 import redis_sql
 import logging
+# Our libs
+from redis_workers.teachers import get_all_teachers
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -11,28 +13,24 @@ logging.basicConfig(filename="logfile.txt",
 
 logging.debug("Logging test...")
 
-# print(redis_sql.get_subjects())
-
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    logging.warning('route index')
-    return render_template('index.html')
+    teachers = get_all_teachers()
+    return render_template('index.html', teachers=teachers)
 
 
 @app.route('/teachers', methods=['get', 'post'])
 def teachers():
-    logging.warning('route teachers post1 method')
-    if request.method == "post":  # не працює!!!!!!!
+    if request.method == "post":
+        # Here we are posting a new teacher
         output = request.form['full_name']
-        logging.warning('route teachers post2 method')
-        logging.error(output)
-        return render_template('teachers.html', lessons=redis_sql.get_lessons(output))
-    else:
-        logging.warning('route teachers get method')
         return render_template('teachers.html')
+    else:
+        # Return a teachers_list to the teachers_page
+        return render_template('teachers.html', teachers=teachers)
 
 
 @app.route("/create_teacher", methods=['get', 'post'])
@@ -48,9 +46,10 @@ def create():
         return render_template('create_teacher.html')
 
 
-@app.route('/changing_sc', methods=['get', 'post'])
+@app.route('/schedules', methods=['get', 'post'])
 def changing_sc():
     if request.method == 'post':
+        # Here create a new schedule in redis
         output = request.form.to_dict()
         redis_sql.changing_sc(output)
     else:

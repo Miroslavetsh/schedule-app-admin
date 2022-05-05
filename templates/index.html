@@ -1,11 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<a href="http://127.0.0.1:5000/changing_sc">змінити розклад</a>
 
 <form>
-    <a href="http://127.0.0.1:5000/changing_sc">змінити розклад</a>
-      <a href="http://127.0.0.1:5000/teachers">вибрати викладача</a>
-      <a href="http://127.0.0.1:5000/create_teacher">створити викладача</a>
+  <select name="teacher_select" id="teacher_select">
+    {% for teacher in teachers %}
+    <option value="{{teacher['id']}}">{{teacher['name']}}</option>
+    {% endfor %}
+    <option value="0" selected disabled>
+      Оберіть Себе
+    </option>
+  </select>
+
+  <button type="submit">Далі</button>
 </form>
 
 {% endblock %}
