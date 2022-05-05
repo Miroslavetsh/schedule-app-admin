@@ -1,9 +1,8 @@
-{% extends 'base.html' %} {% block content %} {{groups}} {% endblock %}
+{% extends 'base.html' %} {% block content %} {{groups}}
 
 <form action="/groups/add" method="post">
-  
+  <input type="text" id="group_name" name="group_name" />
+  <button type="submit">Add</button>
 </form>
 
-<form action="/groups/<str:id>/update"></form>
-
-<form action="/groups/<str:id>/delete"></form>
+{% endblock %}

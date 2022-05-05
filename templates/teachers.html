@@ -1,16 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+Тут список вчителів
+<h3>{{teachers}}</h3>
 
-<form action="/teachers" method="post">
-    <label>введіть піб :</label><br>
-    <input type="text" name="full_name" /><br>
-    <input type="submit" value="send this" />
-  </form>
-
-{% if lessons %}
-<h3>{{lessons}}</h3>
-{% endif %}
-
+Тут форма для додавання вчителя
+<form action="/teachers/add" method="post">
+  <label for="teacher_name">введіть піб :</label><br />
+  <input type="text" id="teacher_name" name="teacher_name" /><br />
+  <button type="submit">Submit</button>
+</form>
 
 {% endblock %}
