@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, redirect, render_template, request
 
 from redis_workers.pairs import get_pairs_by_teacher_id
 
@@ -15,4 +15,4 @@ def get_pairs():
 
         return render_template('pairs.html', pairs=pairs)
     else:
-        return render_template('pairs.html', pairs=[])
+        return redirect('/')
