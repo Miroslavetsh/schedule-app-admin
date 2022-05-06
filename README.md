@@ -10,7 +10,14 @@ This is the second part of already existing schedule-app-ui, which main task of 
 
 ## Overview
 
-Let me start from the _app.py_ file
+Let me start from the _app.py_ file, there we have all our routes, also startup the Flask application. In the templates folder templates have been prepared for each route. Routes placed in the appropriate folder. About routes:
+
+- `/` - the root or index.html file. Teachers can find themselves here and go throw to the _pairs_ page
+- `/pairs` - the result after picking a teacher from select on index page.
+- `/groups `- all of the groups place here.
+- `/groups/add `- add a new group.
+- `/groups/:id/update `- updating a certain group.
+- `/groups/:id/delete `- delete a certain group.
 
 ### Local updates
 

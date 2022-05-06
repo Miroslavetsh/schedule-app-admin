@@ -1,7 +1,7 @@
 
 from flask import Blueprint, render_template, request
 
-from redis_workers.teachers import get_teacher_by_name, get_teachers_list, add_teacher
+from redis_workers.teachers import get_teachers_list, add_teacher
 
 teachers_page = Blueprint('/teachers', __name__, template_folder='templates')
 

@@ -1,18 +1,16 @@
 {% extends 'base.html' %} {% block content %}
 
-<a href="http://127.0.0.1:5000/changing_sc">змінити розклад</a>
-<a href="http://127.0.0.1:5000/create_teacher">добавити викладача</a>
-<form action="/pairs" method="post">
+<a href="/schedules">Створити Запис У Розкладі</a>
+
+<form action="/pairs" method="POST">
   <select name="teacher_id" id="teacher_id">
     {% for teacher in teachers %}
     <option value="{{teacher['id']}}">{{teacher['name']}}</option>
     {% endfor %}
-    <option value="0" selected disabled>
-      Оберіть Себе
-    </option>
+    <option value="0" selected disabled>Оберіть Себе</option>
   </select>
 
-  <button type="submit">Далі</button>
+  <button type="submit">Побачити Свої Пари</button>
 </form>
 
 {% endblock %}
