@@ -1,1 +1,2 @@
-{% extends 'base.html' %} {% block content %} {{pairs}} {% endblock %}
+{% extends 'base.html' %} {% block content %} {{'Для вас не підготовано пар' if not pairs|length else
+pairs }} {% endblock %}
