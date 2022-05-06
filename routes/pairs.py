@@ -16,3 +16,9 @@ def get_pairs():
         return render_template('pairs.html', pairs=pairs)
     else:
         return redirect('/')
+
+
+@pairs_page.route('/<pair_id>/update', methods=['post'])
+def update_pair(pair_id):
+    # TODO: postpone for a while or cancel
+    pass
