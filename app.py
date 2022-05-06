@@ -6,6 +6,7 @@ from redis_workers.teachers import get_teachers_list
 from routes.groups import groups_page
 from routes.teachers import teachers_page
 from routes.pairs import pairs_page
+from routes.schedules import schedules_page
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -27,6 +28,7 @@ def index():
 app.register_blueprint(groups_page, url_prefix='/groups')
 app.register_blueprint(teachers_page, url_prefix='/teachers')
 app.register_blueprint(pairs_page, url_prefix='/pairs')
+app.register_blueprint(schedules_page, url_prefix='/schedules')
 
 
 if __name__ == "__main__":

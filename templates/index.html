@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
+<a href="/schedules">Створити Запис У Розкладі</a>
+
 <form action="/pairs" method="POST">
   <select name="teacher_id" id="teacher_id">
     {% for teacher in teachers %}

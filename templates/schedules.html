@@ -1,9 +1,57 @@
-{% extends 'base.html' %} {% block content %} перейшовши сюда викладачі побачать можливість створити
-і редагувати розклад поле добавити предмет вводять назву місце і викладача поле вчителя вводять ім'я
-поле групи вв назву поле розпорядку вводять айді групи і дні поле пари вв айді предмета та годину
+{% extends 'base.html' %} {% block content %}
+<p style="margin-bottom: 30px">можливість створити і редагувати розклад</p>
 
-<pre>
-  {{subjects}}
-</pre>
+<form
+  action="/schedules/add"
+  method="POST"
+  style="
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    row-gap: 20px;
+  "
+>
+  <select name="group_id" id="group_id">
+    {% for group in groups %}
+    <option type="text" value="{{group['id']}}">{{group[name]}}</option>
+    {% endfor %}
+
+    <!-- Make redirect to groups/add -->
+    <option>Додати Нову</option>
+    <option type="text" value="0" disabled selected>Оберіть Групу</option>
+  </select>
+
+  <select name="day_id" id="day_id">
+    {% for day in days %}
+    <option type="text" value="{{day['id']}}">{{day[name]}}</option>
+    {% endfor %}
+
+    <option type="text" value="0" disabled selected>Оберіть день</option>
+  </select>
+
+  <input type="text" name="time" id="time" placeholder="Час (hh:mm - hh:mm)" />
+
+  <select name="subject_id" id="subject_id">
+    {% for subject in subjects %}
+    <option type="text" value="{{subject['id']}}">{{subject[name]}}</option>
+    {% endfor %}
+
+    <option>Додати новий</option>
+    <option type="text" value="0" disabled selected>Оберіть предмет</option>
+  </select>
+
+  <select name="teacher_id" id="teacher_id">
+    {% for teacher in subjects %}
+    <option type="text" value="{{teacher['id']}}">{{teacher[name]}}</option>
+    {% endfor %}
+
+    <option>Додати нового</option>
+    <option type="text" value="0" disabled selected>Оберіть викладача</option>
+  </select>
+
+  <button type="submit">Підтвердити</button>
+</form>
 
 {% endblock %}
