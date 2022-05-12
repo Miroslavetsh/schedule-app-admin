@@ -1,45 +1,16 @@
-from redis.commands.json.path import Path
-import redis
-import uuid
-
-def subject_notexist(name):
-    return get_subject(name) == None
+import base
 
 def get_subjects():
-    subjects = []
-
-    with redis.Redis() as client:
-        for subject in client.json().get("subjects"):
-            subjects.append(subject)
-
-    return subjects
-
+    return base.get_all_items("subjects")
 
 def get_subject(name):
-    with redis.Redis() as client:
-        for subject in client.json().get("subjects"):
-            if str(subject['name']) == str(name):
-                return subject
-            return None
-
+    return base.get(name=name, default_name="name", arr="subjects")
 
 def create_subject(name, place, teacherid):
-    if subject_notexist:
-        sub_data = {'id': str(uuid.uuid4()), "name": name, "place":place, "teacherid":teacherid}
-        with redis.Redis() as client:
-            client.json().arrappend('subjects', Path.root_path(), sub_data)
-            return True
-    else:
-        return False
+    return base.set(arr="subjects", name=name, place=place, teacherid=teacherid)
 
 def delete_subject(name):
-    if not subject_notexist:
-        with redis.Redis() as client:
-            client.execute_command(f'JSON.DEL subjects $.{name}', Path.root_path())
-            return True
-    else:
-        return False
+    return base.delete(arr="subjects", name=name)
 
-def update_subject(name, place, teacherid):
-    delete_subject(name)
-    create_subject(name,place, teacherid)
+def update_subject(name, new_name, place, teacherid):
+    return base.update(arr="subjects", name=name, new_name=new_name, place=place, teacherid=teacherid)
