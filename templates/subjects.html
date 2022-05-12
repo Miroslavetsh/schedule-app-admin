@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+<p style="margin-bottom: 30px">можливість створити певний предмет</p>
+
+<form action="/subjects/add" method="POST">
+  <input type="text" placeholder="" name="new-subject" id="new-subject" />
+
+  <select name="teacher-id" id="teacher-id">
+    {% for teacher in teachers %}
+    <option type="text" value="{{teacher['id']}}">{{teacher[name]}}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Підтвердити</button>
+</form>
+
+{% endblock %}

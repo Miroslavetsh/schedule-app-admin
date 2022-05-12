@@ -7,6 +7,7 @@ from routes.groups import groups_page
 from routes.teachers import teachers_page
 from routes.pairs import pairs_page
 from routes.schedules import schedules_page
+from routes.subjects import subjects_page
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -29,6 +30,7 @@ app.register_blueprint(groups_page, url_prefix='/groups')
 app.register_blueprint(teachers_page, url_prefix='/teachers')
 app.register_blueprint(pairs_page, url_prefix='/pairs')
 app.register_blueprint(schedules_page, url_prefix='/schedules')
+app.register_blueprint(subjects_page, url_prefix='/subjects')
 
 
 if __name__ == "__main__":
