@@ -11,3 +11,18 @@ with open("D:\project\helpers\example.json", "r", encoding='utf-8') as jsonFile,
     for i in client.json().get('teachers', ):
         print(i, sep='/n')
     jsonFile.close()
+
+
+
+
+
+
+# def delete_group(id):
+#     with redis.Redis() as client:
+#       groups = client.json().get('groups')
+      
+#       for group in groups:
+#         if group['id'] == id:
+#           groups.remove(group)
+
+#       return client.json().set('groups', Path.root_path(), groups)
