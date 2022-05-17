@@ -9,8 +9,8 @@ def get_teacher_by_name(name):
 def add_teacher(name):
     return base.set(arr="teacher", name=name)
 
-def delete_teacher(name):
-    return base.delete(arr="teachers",name=name)
+def delete_teacher(id):
+    return base.delete(arr="teachers",id=id)
 
-def update_teacher(name, new_name):
-    return base.update(arr="teachers", name=name, new_name=new_name)
+def update_teacher(id, new_name):
+    return base.update(arr="teachers", id=id, new_name=new_name)

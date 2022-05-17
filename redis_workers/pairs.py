@@ -32,9 +32,9 @@ def get_pairs(id):
 def create_pairs(subjectId, time):
     return base.set(arr="pairs", subjectId=subjectId, time=time)
 
-def delete_pairs(name):
-    return base.update(arr="pairs", name=name)
+def delete_pairs(id):
+    return base.update(arr="pairs", id=id)
 
 
-def update_pair(name, subjectId, time):
-    return base.update(arr="pairs", name=name, subjectId=subjectId, time=time)
+def update_pair(id, subjectId, time):
+    return base.update(arr="pairs", id=id, subjectId=subjectId, time=time)

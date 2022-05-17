@@ -41,13 +41,13 @@ def set(arr, name=None, groupId=None, days=None, subjectId=None, time=None, plac
                 return False
 
 
-def delete(arr, name):
+def delete(arr, id):
     with redis.Redis() as client:
-        client.execute_command(f'JSON.DEL {arr} $.{name}', Path.root_path())
+        client.execute_command(f'JSON.DEL {arr} $.{id}', Path.root_path())
         return True
 
 
-def update(arr, name=None, new_name=None, groupId=None, days=None, subjectId=None, time=None, place=None, teacherid=None):
-    delete(arr, name)
+def update(arr, id=None, new_name=None, groupId=None, days=None, subjectId=None, time=None, place=None, teacherid=None):
+    delete(arr, id)
     set(arr, new_name, groupId, days, subjectId, time, place, teacherid)
     return True

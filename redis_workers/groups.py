@@ -9,8 +9,8 @@ def get_groups(name):
 def create_group(name):
     return base.set(arr="groups", name=name)
 
-def delete_group(name):
-    return base.delete(arr="groups", name=name)
+def delete_group(id):
+    return base.delete(arr="groups", id=id)
 
-def update_group(name, new_name, subjectId, time):
-    return base.update(arr="groups", name=name, new_name=new_name, subjectId=subjectId, time=time)
+def update_group(id, new_name):
+    return base.update(arr="groups", id=id, new_name=new_name)
