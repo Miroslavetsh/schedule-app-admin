@@ -7,15 +7,18 @@ pairs_page = Blueprint('/pairs', __name__,
                        template_folder='templates')
 
 
-@pairs_page.route('/', methods=['get', 'post'])
+@pairs_page.route('/', methods=['get'])
 def get_pairs():
-    if request.method == 'POST':
-        form_params = request.form.to_dict()
-        pairs = get_pairs_by_teacher_id(form_params['teacher_id'])
+    pairs = []
 
-        return render_template('pairs.html', pairs=pairs)
-    else:
-        return redirect('/')
+    return render_template('pairs.html', pairs=pairs)
+
+
+@pairs_page.route('/<teacher_id>', methods=['post'])
+def get_pairs_by_teacher_id(teacher_id):
+    pairs = get_pairs_by_teacher_id(teacher_id)
+
+    return render_template('pairs.html', pairs=pairs)
 
 
 @pairs_page.route('/<pair_id>/update', methods=['post'])
