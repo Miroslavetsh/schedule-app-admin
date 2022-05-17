@@ -1,4 +1,5 @@
 import base
+from redis_workers import base
 
 def get_subjects():
     return base.get_all_items("subjects")

@@ -1,4 +1,4 @@
-import base 
+from redis_workers import base
 
 def get_schedules(id):
     return base.get(name=id, default_name="id", arr="schedules")

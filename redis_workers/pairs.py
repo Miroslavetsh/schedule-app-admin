@@ -1,5 +1,5 @@
 import redis
-import base
+from redis_workers import base
 
 def get_subjects():
     subjects = []
