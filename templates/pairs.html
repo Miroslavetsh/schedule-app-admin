@@ -1,2 +1,20 @@
-{% extends 'base.html' %} {% block content %} {{'Для вас не підготовано пар' if not pairs|length else
-pairs }} {% endblock %}
+{% extends 'base.html' %} {% block content %}
+<form action="/pairs/add" method="post">
+  <select name="subjectId" id="subjectId">
+    {% for subject in subjects %}
+    <option value="{{subject['id']}}">{{subject['name']}}</option>
+    {% endfor %}
+    <option value="0" selected disabled>Оберіть Предмет</option>
+  </select>
+  <a href="/subjects">Додати предмет</a>
+
+  <fieldset>
+    <label for="startTime"> Час пари у форматі ГОДИНИ:ХВИЛИНИ </label>
+
+    <input type="text" name="startTime" id="startTime" />
+    <input type="text" name="endTime" />
+
+    <button type="submit">Створити</button>
+  </fieldset>
+</form>
+{{ pairs }} {% endblock %}

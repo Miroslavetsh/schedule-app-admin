@@ -11,13 +11,23 @@ pairs_page = Blueprint('/pairs', __name__,
 @pairs_page.route('/', methods=['get'])
 def get_pairs():
     pairs = base.get_all_items("pairs")
-    return render_template('pairs.html', pairs=pairs)
+    subjects = base.get_all_items("subjects")
+    return render_template('pairs.html', pairs=pairs, subjects=subjects)
 
 
 @pairs_page.route('/<teacher_id>', methods=['get'])
 def get_pairs_page_by_teacher_id(teacher_id):
     pairs = get_pairs_by_teacher_id(teacher_id)
     return json.dumps(pairs)
+
+
+@pairs_page.route('/add', methods=['post'])
+def add_pair():
+    # TODO: provide an adding of pair
+    pairs = base.get_all_items("pairs")
+    form_parameters = request.form.to_dict()
+    form_parameters['subjectId']
+    form_parameters['time']
 
 
 @pairs_page.route('/<pair_id>/update', methods=['delete', 'patch', 'post'])
