@@ -4,8 +4,10 @@
 <form action="/subjects/add" method="POST">
   <select name="teacherId" id="teacherId">
     {% for teacher in teachers %}
-    <option type="text" value="{{teacher['id']}}">{{teacher[name]}}</option>
+    <option type="text" value="{{teacher['id']}}">{{ teacher['name'] }}</option>
     {% endfor %}
+
+    <option type="text" value="" selected disabled>Оберіть викладача</option>
   </select>
 
   <input type="text" name="name" id="name" />
@@ -14,4 +16,4 @@
   <button type="submit">Створити</button>
 </form>
 
-{% endblock %}
+{{subjects}} {% endblock %}

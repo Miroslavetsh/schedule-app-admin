@@ -9,16 +9,17 @@ subjects_page = Blueprint('/subjects', __name__,
 @subjects_page.route('/', methods=['get'])
 def get_subjects_page():
     subjects = base.get_all_items("subjects")
-    return render_template('subjects.html', subjects=subjects)
+    teachers = base.get_all_items('teachers')
+    return render_template('subjects.html', subjects=subjects, teachers=teachers)
 
 
 @subjects_page.route('/add', methods=['post'])
 def add_subject_page():
     form_parameters = request.form.to_dict()
     subjects = base.set("subjects",
-     name=form_parameters['name'],
-     place=form_parameters['place'],
-     teacher_id=form_parameters['teacherId'])
+                        name=form_parameters['name'],
+                        place=form_parameters['place'],
+                        teacher_id=form_parameters['teacherId'])
     return render_template('subjects.html', subjects=subjects)
 
 
@@ -26,9 +27,9 @@ def add_subject_page():
 def update_group_page(subject_id):
     form_parameters = request.form.to_dict()
     subjects = base.update("subjects", id=subject_id,
-     name=form_parameters['name'],
-     place=form_parameters['place'],
-     teacher_id=form_parameters["teacherId"])
+                           name=form_parameters['name'],
+                           place=form_parameters['place'],
+                           teacher_id=form_parameters["teacherId"])
     return render_template('subjects.html', subjects=subjects)
 
 
