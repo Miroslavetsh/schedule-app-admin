@@ -27,7 +27,8 @@ def add_pair():
     pairs = base.get_all_items("pairs")
     form_parameters = request.form.to_dict()
     form_parameters['subjectId']
-    form_parameters['time']
+    form_parameters['startTime']
+    form_parameters['endTime']
 
 
 @pairs_page.route('/<pair_id>/update', methods=['delete', 'patch', 'post'])
