@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from redis_workers import base
 from redis_workers.pairs import get_pairs_by_teacher_id
+import json
 
 
 pairs_page = Blueprint('/pairs', __name__,
@@ -13,18 +14,18 @@ def get_pairs():
     return render_template('pairs.html', pairs=pairs)
 
 
-@pairs_page.route('/<teacher_id>', methods=['post'])
-def get_pairs_by_teacher_id(teacher_id):
+@pairs_page.route('/<teacher_id>', methods=['get'])
+def get_pairs_page_by_teacher_id(teacher_id):
     pairs = get_pairs_by_teacher_id(teacher_id)
-    return render_template('pairs.html', pairs=pairs)
+    return json.dumps(pairs)
 
 
 @pairs_page.route('/<pair_id>/update', methods=['delete', 'patch', 'post'])
 def update_pair(pair_id):
     form_parameters = request.form.to_dict()
     pairs = base.update(arr="pairs", id=pair_id,
-     subjectId=form_parameters['subjectId'],
-     time=form_parameters['time'])
+                        subjectId=form_parameters['subjectId'],
+                        time=form_parameters['time'])
     return render_template('pairs.html', pairs=pairs)
 
 
