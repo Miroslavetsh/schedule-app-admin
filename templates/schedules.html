@@ -42,7 +42,7 @@
     <option type="text" value="0" disabled selected>Оберіть предмет</option>
   </select>
 
-  <select name="teacher_id" id="teacher_id">
+  <select name="teacherId" id="teacherId">
     {% for teacher in subjects %}
     <option type="text" value="{{teacher['id']}}">{{teacher[name]}}</option>
     {% endfor %}

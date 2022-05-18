@@ -18,7 +18,7 @@ def add_subject_page():
     subjects = base.set("subjects",
      name=form_parameters['name'],
      place=form_parameters['place'],
-     teacherid=form_parameters['teacherid'])
+     teacher_id=form_parameters['teacherId'])
     return render_template('subjects.html', subjects=subjects)
 
 
@@ -28,7 +28,7 @@ def update_group_page(subject_id):
     subjects = base.update("subjects", id=subject_id,
      name=form_parameters['name'],
      place=form_parameters['place'],
-     teacherid=form_parameters['teacherid'])
+     teacher_id=form_parameters["teacherId"])
     return render_template('subjects.html', subjects=subjects)
 
 
