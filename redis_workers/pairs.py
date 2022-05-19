@@ -1,22 +1,33 @@
+import os
 import redis
 from redis_workers import base
+from dotenv import load_dotenv
+
+load_dotenv()
+REDIS_HOST = os.environ['REDIS_HOST']
+REDIS_PORT = int(os.environ['REDIS_PORT'])
+REDIS_PASSWORD = os.environ['REDIS_PASSWORD']
+
+client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
+
 
 def get_subjects():
     subjects = []
-    with redis.Redis() as client:
+    with client:
         for subject in client.json().get("subjects"):
             subjects.append(subject)
     return subjects
+
 
 def get_pairs_by_teacher_id(id):
     pairs = []
     subjects_assigned_to_the_teacher = []
 
     for subject in get_subjects():
-            if str(subject['teacherId']) == str(id):
-                subjects_assigned_to_the_teacher.append(subject)
+        if str(subject['teacherId']) == str(id):
+            subjects_assigned_to_the_teacher.append(subject)
 
-    with redis.Redis() as client:
+    with client:
 
         for pair in client.json().get('pairs'):
             for subject in subjects_assigned_to_the_teacher:
@@ -31,6 +42,7 @@ def get_pairs(id):
 
 def create_pairs(subjectId, time):
     return base.set(arr="pairs", subjectId=subjectId, time=time)
+
 
 def delete_pairs(id):
     return base.update(arr="pairs", id=id)

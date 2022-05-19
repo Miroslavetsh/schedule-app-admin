@@ -1,3 +1,5 @@
 redis_sandbox
 __pycache__
 logfile.txt
+.vscode
+.env
