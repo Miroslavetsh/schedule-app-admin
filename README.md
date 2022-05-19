@@ -57,7 +57,6 @@ Let me start from the _app.py_ file, there we have all our routes, also startup 
 
 - Firstly, you need to install a docker with related `redis-redisjson` container and run it, next - open a CLI by clicking on a cli button and run `redis-cli` command
 
-- Secondly, run a _fill\_redis.py_ file with `python helpers/fill_redis.py` command
+- Secondly, run a _fill_redis.py_ file with `python helpers/fill_redis.py` command
 
 - Thirdly, install all pip requirements and run `flask-run` from root of the project. Now you got your local setup of Flask application
-
