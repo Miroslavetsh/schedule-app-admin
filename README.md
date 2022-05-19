@@ -55,7 +55,7 @@ Let me start from the _app.py_ file, there we have all our routes, also startup 
 
 ## How to run it locally
 
-- Firstly, you need to install a docker with related `redis-redisjson` container and run it, next - open a CLI by clicking on a cli button and run `redis-cli` command
+- Firstly, you need to get access to the Redis Cloud DB, which contains all of the entities, so we provide to you some credentials placed in `.env` file
 
 - Secondly, run a _fill_redis.py_ file with `python helpers/fill_redis.py` command
 
