@@ -1,13 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
-Тут список вчителів
-<h3>{{teachers}}</h3>
+<h3>Створюємо викладача</h3>
 
-Тут форма для додавання вчителя
 <form action="/teachers/add" method="POST">
-  <label for="teacher_name">введіть піб :</label><br />
-  <input type="text" id="teacher_name" name="teacher_name" /><br />
-  <button type="submit">Submit</button>
+  <input type="text" id="teacher_name" name="teacher_name" placeholder="введіть повне ім'я" /><br />
+  <button type="submit">Створити</button>
 </form>
- 
-{% endblock %}
+
+<p>Тут список вчителів</p>
+{{teachers}} {% endblock %}
