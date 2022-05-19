@@ -8,6 +8,7 @@ from routes.teachers import teachers_page
 from routes.pairs import pairs_page
 from routes.schedules import schedules_page
 from routes.subjects import subjects_page
+from routes.api.db import db_api
 
 logging.basicConfig(filename="logfile.txt",
                     filemode='w',
@@ -31,6 +32,8 @@ app.register_blueprint(teachers_page, url_prefix='/teachers')
 app.register_blueprint(pairs_page, url_prefix='/pairs')
 app.register_blueprint(schedules_page, url_prefix='/schedules')
 app.register_blueprint(subjects_page, url_prefix='/subjects')
+
+app.register_blueprint(db_api, url_prefix='/api/db')
 
 
 if __name__ == "__main__":
