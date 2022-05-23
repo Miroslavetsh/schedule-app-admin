@@ -42,6 +42,12 @@ def get(name, default_name, arr):
                 return array
             return None
 
+def get_by_id(collection_name, id):
+    with client:
+        for entity in client.json().get(collection_name):
+            if entity['id'] == id:
+                return entity
+
 
 def set(arr, name=None, groupId=None, days=None, subjectId=None, time=None, place=None, teacher_id=None):
     if not_exist(name, "name", arr) or not_exist(name, "id", arr):

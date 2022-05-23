@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<p style="margin-bottom: 30px">можливість створити і редагувати розклад</p>
+<p style="margin-bottom: 30px">Створюємо графік</p>
 
 <form
   action="/schedules/add"
@@ -15,7 +15,7 @@
 >
   <select name="group_id" id="group_id">
     {% for group in groups %}
-    <option type="text" value="{{group['id']}}">{{group[name]}}</option>
+    <option type="text" value="{{group['id']}}">{{group['name']}}</option>
     {% endfor %}
 
     <!-- Make redirect to groups/add -->
@@ -25,33 +25,25 @@
 
   <select name="day_id" id="day_id">
     {% for day in days %}
-    <option type="text" value="{{day['id']}}">{{day[name]}}</option>
+    <option type="text" value="{{day['id']}}">{{day['name']}}</option>
     {% endfor %}
 
     <option type="text" value="0" disabled selected>Оберіть день</option>
   </select>
 
-  <input type="text" name="time" id="time" placeholder="Час (hh:mm - hh:mm)" />
-
-  <select name="subject_id" id="subject_id">
-    {% for subject in subjects %}
-    <option type="text" value="{{subject['id']}}">{{subject[name]}}</option>
+  <select name="pair_id" id="pair_id">
+    {% for pair in pairs %}
+    <option type="text" value="{{pair['id']}}">
+      {{pair['name']}} ({{pair['teacher']}})
+      <strong> {{pair['time']}} </strong>
+    </option>
     {% endfor %}
 
-    <option>Додати новий</option>
-    <option type="text" value="0" disabled selected>Оберіть предмет</option>
+    <option>Додати Нову</option>
+    <option type="text" value="0" disabled selected>Оберіть Пару</option>
   </select>
 
-  <select name="teacherId" id="teacherId">
-    {% for teacher in subjects %}
-    <option type="text" value="{{teacher['id']}}">{{teacher[name]}}</option>
-    {% endfor %}
-
-    <option>Додати нового</option>
-    <option type="text" value="0" disabled selected>Оберіть викладача</option>
-  </select>
-
-  <button type="submit">Підтвердити</button>
+  <button type="submit">Зберегти</button>
 </form>
 
 {% endblock %}
