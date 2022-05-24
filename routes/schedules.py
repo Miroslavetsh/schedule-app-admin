@@ -12,8 +12,8 @@ def get_schedules():
     pairs = base.get_all_items('pairs')
 
     for pair in pairs:
-        subj = base.get_by_id('subjects', pair['subjectId'])
-        teacher = base.get_by_id('teachers', subj['teacherId'])
+        subj = base.get_entity_from_collection_by_id('subjects', pair['subjectId'])
+        teacher = base.get_entity_from_collection_by_id('teachers', subj['teacherId'])
         
         pair['name'] = subj['name']
         pair['teacher'] = teacher['name']

@@ -42,7 +42,7 @@ def get(name, default_name, arr):
                 return array
             return None
 
-def get_by_id(collection_name, id):
+def get_entity_from_collection_by_id(collection_name, id):
     with client:
         for entity in client.json().get(collection_name):
             if entity['id'] == id:
@@ -63,7 +63,7 @@ def set(arr, name=None, groupId=None, days=None, subjectId=None, time=None, plac
 
 def delete(arr, id):
     with client:
-        client.execute_command(f'JSON.DEL {arr} $.{id}', Path.root_path())
+        client.delete(f'JSON.DEL {arr} $.{id}', Path.root_path())
         return True
 
 
