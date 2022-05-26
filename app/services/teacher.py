@@ -1,3 +1,4 @@
+from models.teacher import Teacher
 from services import base
 
 
@@ -10,11 +11,13 @@ def get(id):
 
 
 def post(body):
-    return base.post("teachers", **body)
+    teacher = Teacher(**body)
+    return base.post("teachers", teacher.__dict__)
 
 
 def put(body):
-    return base.put("teachers", body["id"], **body)
+    teacher = Teacher(**body)
+    return base.put("teachers", teacher["id"], teacher.__dict__)
 
 
 def delete(id):

@@ -17,5 +17,5 @@ logging.basicConfig(filename="logfile.txt",
 
 logging.debug("Logging test...")
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__)
 db = Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)

@@ -3,7 +3,7 @@ import json
 from flask import Blueprint, request
 import services.teacher as teacher_service
 
-api = Blueprint('teachers', __name__, template_folder='templates')
+api = Blueprint('teachers', __name__)
 
 
 @api.route('/teachers', methods=['GET'])
@@ -23,9 +23,9 @@ def add_teacher():
 
 @api.route('/teachers/<string:id>', methods=['PUT'])
 def update_teacher(id):
-    teacher_service.put(id, request.json)
+    return json.dumps(teacher_service.put(id, request.json))
 
 
 @api.route('/teachers/<string:id>', methods=['DELETE'])
 def delete_teacher(id):
-    teacher_service.delete(id)
+    return json.dumps(teacher_service.delete(id))
