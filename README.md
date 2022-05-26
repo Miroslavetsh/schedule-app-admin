@@ -35,9 +35,10 @@ Let me start from the _app.py_ file, there we have all our routes, also startup 
 #### teachers
 
 - `/teachers` - GET all teachers
-- `/teachers/add` - POST after filling the adding a new one teacher
-- `/teachers/<teacher_id>/delete/` - DELETE|POST to remove a teacher from teachers list and then back to index
-- `/teachers/<teacher_id>/update/` - PATCH|PUT|POST to update a teacher from teachers list and then back to index
+- `/teachers` - POST adding a new teacher to the teachers table
+- `/teachers/:id` - GET after filling the adding a new one teacher
+- `/teachers/:id` - PUT to update a teacher from teachers list
+- `/teachers/:id` - DELETE to remove a teacher from teachers list
 
 #### schedules
 
