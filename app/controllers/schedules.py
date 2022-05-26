@@ -1,27 +1,29 @@
 from flask import Blueprint, render_template, request
-from redis_workers import base
+from services import base
 
-schedules_page = Blueprint('/schedules', __name__,
-                           template_folder='templates')
+api = Blueprint('schedules', __name__,
+                template_folder='templates')
 
 
-@schedules_page.route('/', methods=['get'])
+@api.route('/', methods=['get'])
 def get_schedules():
     groups = base.get_all_items('groups')
     days = base.get_all_items('days')
     pairs = base.get_all_items('pairs')
 
     for pair in pairs:
-        subj = base.get_entity_from_collection_by_id('subjects', pair['subjectId'])
-        teacher = base.get_entity_from_collection_by_id('teachers', subj['teacherId'])
-        
+        subj = base.get_entity_from_collection_by_id(
+            'subjects', pair['subjectId'])
+        teacher = base.get_entity_from_collection_by_id(
+            'teachers', subj['teacherId'])
+
         pair['name'] = subj['name']
         pair['teacher'] = teacher['name']
 
     return render_template('schedules.html', groups=groups, days=days, pairs=pairs)
 
 
-@schedules_page.route('/add', methods=['post'])
+@api.route('/add', methods=['post'])
 def add_schedule():
     form_parameters = request.form.to_dict()
     schedules = base.set(
@@ -29,7 +31,7 @@ def add_schedule():
     return render_template('schedules.html', schedules=schedules)
 
 
-@schedules_page.route('/<schedule_id>/update', methods=['delete', 'patch', 'post'])
+@api.route('/<schedule_id>/update', methods=['delete', 'patch', 'post'])
 def update_schedule(schedule_id):
     form_parameters = request.form.to_dict()
     schedules = base.update(arr="schedules", id=schedule_id,
@@ -37,7 +39,7 @@ def update_schedule(schedule_id):
     return render_template('schedules.html', schedules=schedules)
 
 
-@schedules_page.route('/<schedule_id>/delete', methods=['delete', 'post'])
+@api.route('/<schedule_id>/delete', methods=['delete', 'post'])
 def delete_schedule(schedule_id):
     schedules = base.delete("schedules", schedule_id)
     return render_template('schedules.html', schedules=schedules)

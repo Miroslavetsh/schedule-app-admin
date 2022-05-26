@@ -1,4 +1,4 @@
-from redis_workers import base
+from services import base
 
 def get_all_groups():
     return base.get_all_items("groups")

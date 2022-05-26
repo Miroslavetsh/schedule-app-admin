@@ -1,19 +1,19 @@
 from flask import Blueprint, render_template, request
-from redis_workers import base
+from services import base
 
 
-subjects_page = Blueprint('/subjects', __name__,
-                          template_folder='templates')
+api = Blueprint('subjects', __name__,
+                template_folder='templates')
 
 
-@subjects_page.route('/', methods=['get'])
-def get_subjects_page():
+@api.route('/', methods=['get'])
+def get_api():
     subjects = base.get_all_items("subjects")
     teachers = base.get_all_items('teachers')
     return render_template('subjects.html', subjects=subjects, teachers=teachers)
 
 
-@subjects_page.route('/add', methods=['post'])
+@api.route('/add', methods=['post'])
 def add_subject_page():
     form_parameters = request.form.to_dict()
     subjects = base.set("subjects",
@@ -23,7 +23,7 @@ def add_subject_page():
     return render_template('subjects.html', subjects=subjects)
 
 
-@subjects_page.route('/<subject_id>/update', methods=['delete', 'patch', 'post'])
+@api.route('/<subject_id>/update', methods=['delete', 'patch', 'post'])
 def update_group_page(subject_id):
     form_parameters = request.form.to_dict()
     subjects = base.update("subjects", id=subject_id,
@@ -33,7 +33,7 @@ def update_group_page(subject_id):
     return render_template('subjects.html', subjects=subjects)
 
 
-@subjects_page.route('/<subject_id>/delete', methods=['delete', 'post'])
+@api.route('/<subject_id>/delete', methods=['delete', 'post'])
 def delete_group_page(subject_id):
     subjects = base.delete("subjects", id=subject_id)
     return render_template('subjects.html', subjects=subjects)

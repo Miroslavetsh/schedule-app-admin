@@ -1,14 +1,6 @@
 import os
-import redis
-from redis_workers import base
-from dotenv import load_dotenv
-
-load_dotenv()
-REDIS_HOST = os.environ['REDIS_HOST']
-REDIS_PORT = int(os.environ['REDIS_PORT'])
-REDIS_PASSWORD = os.environ['REDIS_PASSWORD']
-
-client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
+from services import base
+from config import db as client
 
 
 def get_subjects():

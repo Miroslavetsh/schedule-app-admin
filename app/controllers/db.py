@@ -1,12 +1,12 @@
 import json
 from flask import Blueprint
-from redis_workers import base
+from services import base
 
-db_api = Blueprint('/api/db', __name__,
-                   template_folder='templates')
+api = Blueprint('db', __name__,
+                template_folder='templates')
 
 
-@db_api.route('/', methods=['get'])
+@api.route('/', methods=['get'])
 def get_all_schedules():
     response = {}
 
