@@ -1,6 +1,6 @@
-
 import json
 from flask import Blueprint, request
+
 import services.teacher as teacher_service
 
 api = Blueprint('teachers', __name__)
