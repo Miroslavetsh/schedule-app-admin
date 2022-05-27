@@ -3,22 +3,23 @@ from services import base
 
 
 def get_all():
-    return base.get_all("teachers")
+    return base.get_all(Teacher.tablename)
 
 
 def get(id):
-    return base.get("teachers", id)
+    return base.get(Teacher.tablename, id)
 
 
 def post(body):
     teacher = Teacher(**body)
-    return base.post("teachers", teacher.__dict__)
+    return base.post(Teacher.tablename, teacher.__dict__)
 
 
-def put(body):
+def put(id, body):
     teacher = Teacher(**body)
-    return base.put("teachers", teacher["id"], teacher.__dict__)
+    teacher.__dict__["id"] = id
+    return base.put(Teacher.tablename, teacher.__dict__)
 
 
 def delete(id):
-    return base.delete("teachers", id)
+    return base.delete(Teacher.tablename, id)

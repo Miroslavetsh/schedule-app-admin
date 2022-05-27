@@ -1,4 +1,5 @@
 from werkzeug.exceptions import NotFound
+from redis.commands.json.path import Path
 
 from config import db as client
 
@@ -18,18 +19,17 @@ def get(collection_name, id):
 
 def post(collection_name, obj):
     with client:
-        print(collection_name, obj)
-        # TODO: Redis Add
-        # client.json().set(collection_name, obj=obj)
+        client.json().arrappend(collection_name, Path.root_path(), obj)
         return obj
 
 
-def put(collection_name, id, obj):
+def put(collection_name, obj):
+    id = obj["id"]
+
     with client:
         if (get(collection_name, id) != None):
-            print(collection_name, obj)
-            # TODO: Redis Update or GET + POST
-            # client.json().set(id, collection_name, obj)
+            delete(collection_name, id)
+            post(collection_name, obj)
             return obj
         else:
             raise NotFound('No such entity found with id=' + str(id))
@@ -38,8 +38,14 @@ def put(collection_name, id, obj):
 def delete(collection_name, id):
     with client:
         if (get(collection_name, id) != None):
-            # TODO: Redis delete
-            # client.json().delete(id, collection_name)
+            collection = get_all(collection_name)
+
+            for entity in collection:
+                if entity['id'] == id:
+                    collection.remove(entity)
+
+            client.json().set(collection_name, Path.root_path(), collection)
+
             return {'success': True}
         else:
             raise NotFound('No such entity found with id=' + str(id))

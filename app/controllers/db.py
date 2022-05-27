@@ -2,17 +2,16 @@ import json
 from flask import Blueprint
 from services import base
 
-api = Blueprint('db', __name__,
-                template_folder='templates')
+api = Blueprint('db', __name__)
 
 
-@api.route('/', methods=['get'])
-def get_all_schedules():
+@api.route('/db', methods=['GET'])
+def get_db():
     response = {}
 
-    list_of_entities = ["subjects", "teachers",
-                        "groups", "schedules", "pairs", "days"]
-    for key in list_of_entities:
-        response[key] = base.get_all_items(key)
+    tables = ["subjects", "teachers",
+              "groups", "schedules", "pairs", "days"]
+    for key in tables:
+        response[key] = base.get_all(key)
 
     return json.dumps(response)
