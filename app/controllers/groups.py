@@ -1,31 +1,31 @@
-from flask import Blueprint, render_template, request
-from services import base
+import json
+from flask import Blueprint, request
+
+import services.group as group_service
 
 api = Blueprint('groups', __name__)
 
 
-@api.route('/', methods=['get'])
-def get_all():
-    groups = base.get_all_items("groups")
-    return render_template('groups.html', groups=groups)
+@api.route('/groups', methods=['GET'])
+def get_all_groups():
+    return json.dumps(group_service.get_all())
 
 
-@api.route('/add', methods=['post'])
-def add_group_page():
-    form_parameters = request.form.to_dict()
-    groups = base.set(arr="groups", name=form_parameters['name'])
-    return render_template('groups.html', groups=groups)
+@api.route('/groups/<string:id>', methods=['GET'])
+def get_group(id):
+    return json.dumps(group_service.get(id))
 
 
-@api.route('/<group_id>/update', methods=['delete', 'patch', 'post'])
-def update_group_page(group_id):
-    form_parameters = request.form.to_dict()
-    groups = base.update(arr="groups", id=group_id,
-                         new_name=form_parameters['new_name'])
-    return render_template('groups.html', groups=groups)
+@api.route("/groups", methods=['POST'])
+def add_group():
+    return json.dumps(group_service.post(request.json))
 
 
-@api.route('/<group_id>/delete', methods=['delete', 'post'])
-def delete_group_page(group_id):
-    groups = base.delete(arr="groups", id=group_id)
-    return render_template('groups.html', groups=groups)
+@api.route('/groups/<string:id>', methods=['PUT'])
+def update_group(id):
+    return json.dumps(group_service.put(id, request.json))
+
+
+@api.route('/groups/<string:id>', methods=['DELETE'])
+def delete_group(id):
+    return json.dumps(group_service.delete(id))
