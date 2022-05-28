@@ -1,45 +1,31 @@
-from flask import Blueprint, render_template, request
-from services import base
+import json
+from flask import Blueprint, request
 
-api = Blueprint('schedules', __name__,
-                template_folder='templates')
+import services.schedule as schedule_service
 
-
-@api.route('/', methods=['get'])
-def get_schedules():
-    groups = base.get_all_items('groups')
-    days = base.get_all_items('days')
-    pairs = base.get_all_items('pairs')
-
-    for pair in pairs:
-        subj = base.get_entity_from_collection_by_id(
-            'subjects', pair['subjectId'])
-        teacher = base.get_entity_from_collection_by_id(
-            'teachers', subj['teacherId'])
-
-        pair['name'] = subj['name']
-        pair['teacher'] = teacher['name']
-
-    return render_template('schedules.html', groups=groups, days=days, pairs=pairs)
+api = Blueprint('schedules', __name__)
 
 
-@api.route('/add', methods=['post'])
+@api.route('/schedules', methods=['GET'])
+def get_all_schedules():
+    return json.dumps(schedule_service.get_all())
+
+
+@api.route('/schedules/<string:id>', methods=['GET'])
+def get_schedule(id):
+    return json.dumps(schedule_service.get(id))
+
+
+@api.route("/schedules", methods=['POST'])
 def add_schedule():
-    form_parameters = request.form.to_dict()
-    schedules = base.set(
-        arr="schedules", groupId=form_parameters['groupId'], days=form_parameters['days'])
-    return render_template('schedules.html', schedules=schedules)
+    return json.dumps(schedule_service.post(request.json))
 
 
-@api.route('/<schedule_id>/update', methods=['delete', 'patch', 'post'])
-def update_schedule(schedule_id):
-    form_parameters = request.form.to_dict()
-    schedules = base.update(arr="schedules", id=schedule_id,
-                            groupId=form_parameters['groupId'], days=form_parameters['days'])
-    return render_template('schedules.html', schedules=schedules)
+@api.route('/schedules/<string:id>', methods=['PUT'])
+def update_schedule(id):
+    return json.dumps(schedule_service.put(id, request.json))
 
 
-@api.route('/<schedule_id>/delete', methods=['delete', 'post'])
-def delete_schedule(schedule_id):
-    schedules = base.delete("schedules", schedule_id)
-    return render_template('schedules.html', schedules=schedules)
+@api.route('/schedules/<string:id>', methods=['DELETE'])
+def delete_schedule(id):
+    return json.dumps(schedule_service.delete(id))
