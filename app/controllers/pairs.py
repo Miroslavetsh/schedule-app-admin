@@ -1,45 +1,31 @@
-from flask import Blueprint, render_template, request
-from services import base
-from services.pairs import get_pairs_by_teacher_id
 import json
+from flask import Blueprint, request
+
+import services.pair as pair_service
+
+api = Blueprint('pairs', __name__)
 
 
-api = Blueprint('pairs', __name__,
-                template_folder='templates')
+@api.route('/pairs', methods=['GET'])
+def get_all_pairs():
+    return json.dumps(pair_service.get_all())
 
 
-@api.route('/', methods=['get'])
-def get_pairs():
-    pairs = base.get_all_items("pairs")
-    subjects = base.get_all_items("subjects")
-    return render_template('pairs.html', pairs=pairs, subjects=subjects)
+@api.route('/pairs/<string:id>', methods=['GET'])
+def get_pair(id):
+    return json.dumps(pair_service.get(id))
 
 
-@api.route('/<teacher_id>', methods=['get'])
-def get_api_by_teacher_id(teacher_id):
-    pairs = get_pairs_by_teacher_id(teacher_id)
-    return json.dumps(pairs)
-
-
-@api.route('/add', methods=['post'])
+@api.route("/pairs", methods=['POST'])
 def add_pair():
-    pairs = base.get_all_items("pairs")
-    form_parameters = request.form.to_dict()
-    form_parameters['subjectId']
-    form_parameters['startTime']
-    form_parameters['endTime']
+    return json.dumps(pair_service.post(request.json))
 
 
-@api.route('/<pair_id>/update', methods=['delete', 'patch', 'post'])
-def update_pair(pair_id):
-    form_parameters = request.form.to_dict()
-    pairs = base.update(arr="pairs", id=pair_id,
-                        subjectId=form_parameters['subjectId'],
-                        time=form_parameters['time'])
-    return render_template('pairs.html', pairs=pairs)
+@api.route('/pairs/<string:id>', methods=['PUT'])
+def update_pair(id):
+    return json.dumps(pair_service.put(id, request.json))
 
 
-@api.route('/<pair_id>/delete', methods=['delete', 'post'])
-def delete_pair_page(pair_id):
-    subjects = base.delete("pairs", id=pair_id)
-    return render_template('pairs.html', subjects=subjects)
+@api.route('/pairs/<string:id>', methods=['DELETE'])
+def delete_pair(id):
+    return json.dumps(pair_service.delete(id))
