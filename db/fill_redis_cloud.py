@@ -3,7 +3,7 @@ import json
 import os
 from redis.commands.json.path import Path
 
-from app.config import db as client
+from config import db as client
 
 path_to_example = '\example.json'
 
