@@ -66,4 +66,4 @@ Let me start from the _app.py_ file, there we have all our routes, also startup 
 
 ### The root endpoint _/_ is UNAVAILABLE
 
-(staging)[http://schedule-app-admin.herokuapp.com/]
+[staging](http://schedule-app-admin.herokuapp.com/)
