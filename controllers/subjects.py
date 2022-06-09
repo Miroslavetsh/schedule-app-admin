@@ -1,31 +1,36 @@
 import json
 from flask import Blueprint, request
 
-import services.subject as subject_service
+import services.subject as service
 
 api = Blueprint('subjects', __name__)
 
 
 @api.route('/subjects', methods=['GET'])
 def get_all_subjects():
-    return json.dumps(subject_service.get_all())
+    return json.dumps(service.get_all())
 
 
 @api.route('/subjects/<string:id>', methods=['GET'])
 def get_subject(id):
-    return json.dumps(subject_service.get(id))
+    return json.dumps(service.get(id))
+
+
+@api.route('/subjects/get-by-teacher-id/<string:id>', methods=['GET'])
+def get_all_subjects_by_teacher_id(id):
+    return json.dumps(service.get_by_teacher_id(id))
 
 
 @api.route("/subjects", methods=['POST'])
 def add_subject():
-    return json.dumps(subject_service.post(request.json))
+    return json.dumps(service.post(request.json))
 
 
 @api.route('/subjects/<string:id>', methods=['PUT'])
 def update_subject(id):
-    return json.dumps(subject_service.put(id, request.json))
+    return json.dumps(service.put(id, request.json))
 
 
 @api.route('/subjects/<string:id>', methods=['DELETE'])
 def delete_subject(id):
-    return json.dumps(subject_service.delete(id))
+    return json.dumps(service.delete(id))
