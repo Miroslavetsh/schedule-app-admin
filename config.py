@@ -3,6 +3,7 @@ from flask import Flask
 import logging
 from dotenv import load_dotenv
 from redis import Redis
+from flask_cors import CORS
 
 load_dotenv()
 REDIS_HOST = os.environ['REDIS_HOST']
@@ -18,4 +19,8 @@ logging.basicConfig(filename="logfile.txt",
 logging.debug("Logging test...")
 
 app = Flask(__name__)
+CORS(app)
+
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 db = Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)

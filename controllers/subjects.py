@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request
-
+from flask_cors import cross_origin
 import services.subject as service
 
 api = Blueprint('subjects', __name__)
@@ -17,6 +17,7 @@ def get_subject(id):
 
 
 @api.route('/subjects/get-by-teacher-id/<string:id>', methods=['GET'])
+@cross_origin()
 def get_all_subjects_by_teacher_id(id):
     return json.dumps(service.get_by_teacher_id(id))
 
