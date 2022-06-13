@@ -62,8 +62,6 @@ Let me start from the _app.py_ file, there we have all our routes, also startup 
 
 - Thirdly, install all pip requirements and run `flask-run` from root of the project. Now you got your local setup of Flask application
 
-## Deployment
+## Deployment Annotation
 
 ### The root endpoint _/_ is UNAVAILABLE
-
-[staging](http://schedule-app-admin.herokuapp.com/)
