@@ -28,6 +28,7 @@ def add_subject():
 
 
 @api.route('/subjects/<string:id>', methods=['PUT'])
+@cross_origin()
 def update_subject(id):
     return json.dumps(service.put(id, request.json))
 
